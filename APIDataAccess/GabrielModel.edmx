@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Gabriel_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Gabriel_DB.dbo.Law_Classification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Law_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Jurisdiction" Type="nvarchar" MaxLength="255" />
+          <Property Name="Law" Type="nvarchar" MaxLength="255" />
+          <Property Name="Debt_Collection_Banking" Type="float" />
+          <Property Name="Political" Type="float" />
+          <Property Name="Crime_Penalty" Type="float" />
+          <Property Name="Property_Sale" Type="float" />
+          <Property Name="Generic_Scam" Type="float" />
+          <Property Name="Legitimate" Type="float" />
+          <Property Name="Profanity" Type="float" />
+          <Property Name="Foreign" Type="float" />
+          <Property Name="Start_Time" Type="time" Precision="7" />
+          <Property Name="End_Time" Type="time" Precision="7" />
+          <Property Name="Time_Stamp" Type="datetime" />
+          <Property Name="Target_Value" Type="float" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Law_Recording_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATE" Type="nvarchar" MaxLength="255" />
+          <Property Name="CONSENT" Type="nvarchar" MaxLength="255" />
+          <Property Name="AUTHORITY" Type="nvarchar(max)" />
+          <Property Name="EXPLANATION/ADDITIONAL INFORMATION" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Model_Catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="model_name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="model_version" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="model_author" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="model_url" Type="ntext" Nullable="false" />
+          <Property Name="model_deployment_environment" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="model_input_features" Type="ntext" Nullable="false" />
+          <Property Name="model_dataset_location" Type="ntext" Nullable="false" />
+          <Property Name="model_code_location" Type="ntext" Nullable="false" />
+          <Property Name="model_environment_status" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="model_artifacts" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="Gabriel_DBModelStoreContainer">
+          <EntitySet Name="Model_Catalog" EntityType="Self.Model_Catalog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Law_Classification" EntityType="Self.Law_Classification" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Law_Classification].[ID] AS [ID], 
+    [Law_Classification].[Jurisdiction] AS [Jurisdiction], 
+    [Law_Classification].[Law] AS [Law], 
+    [Law_Classification].[Debt_Collection_Banking] AS [Debt_Collection_Banking], 
+    [Law_Classification].[Political] AS [Political], 
+    [Law_Classification].[Crime_Penalty] AS [Crime_Penalty], 
+    [Law_Classification].[Property_Sale] AS [Property_Sale], 
+    [Law_Classification].[Generic_Scam] AS [Generic_Scam], 
+    [Law_Classification].[Legitimate] AS [Legitimate], 
+    [Law_Classification].[Profanity] AS [Profanity], 
+    [Law_Classification].[Foreign] AS [Foreign], 
+    [Law_Classification].[Start_Time] AS [Start_Time], 
+    [Law_Classification].[End_Time] AS [End_Time], 
+    [Law_Classification].[Time_Stamp] AS [Time_Stamp], 
+    [Law_Classification].[Target_Value] AS [Target_Value]
+    FROM [dbo].[Law_Classification] AS [Law_Classification]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Law_Recording_Classification" EntityType="Self.Law_Recording_Classification" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Law_Recording_Classification].[ID] AS [ID], 
+    [Law_Recording_Classification].[STATE] AS [STATE], 
+    [Law_Recording_Classification].[CONSENT] AS [CONSENT], 
+    [Law_Recording_Classification].[AUTHORITY] AS [AUTHORITY], 
+    [Law_Recording_Classification].[EXPLANATION/ADDITIONAL INFORMATION] AS [EXPLANATION/ADDITIONAL INFORMATION]
+    FROM [dbo].[Law_Recording_Classification] AS [Law_Recording_Classification]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Gabriel_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Law_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Jurisdiction" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Law" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Debt_Collection_Banking" Type="Double" />
+          <Property Name="Political" Type="Double" />
+          <Property Name="Crime_Penalty" Type="Double" />
+          <Property Name="Property_Sale" Type="Double" />
+          <Property Name="Generic_Scam" Type="Double" />
+          <Property Name="Legitimate" Type="Double" />
+          <Property Name="Profanity" Type="Double" />
+          <Property Name="Foreign" Type="Double" />
+          <Property Name="Start_Time" Type="Time" Precision="7" />
+          <Property Name="End_Time" Type="Time" Precision="7" />
+          <Property Name="Time_Stamp" Type="DateTime" Precision="3" />
+          <Property Name="Target_Value" Type="Double" />
+        </EntityType>
+        <EntityContainer Name="Gabriel_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Law_Classification" EntityType="Self.Law_Classification" />
+          <EntitySet Name="Law_Recording_Classification" EntityType="Gabriel_DBModel.Law_Recording_Classification" />
+          <EntitySet Name="Model_Catalog" EntityType="Gabriel_DBModel.Model_Catalog" />
+        </EntityContainer>
+        <EntityType Name="Law_Recording_Classification">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATE" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CONSENT" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AUTHORITY" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EXPLANATION_ADDITIONAL_INFORMATION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Model_Catalog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="model_name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="model_version" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="model_author" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="model_url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="model_deployment_environment" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="model_input_features" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="model_dataset_location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="model_code_location" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="model_environment_status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="model_artifacts" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Gabriel_DBModelStoreContainer" CdmEntityContainer="Gabriel_DBEntities">
+          <EntitySetMapping Name="Law_Classification">
+            <EntityTypeMapping TypeName="Gabriel_DBModel.Law_Classification">
+              <MappingFragment StoreEntitySet="Law_Classification">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+                <ScalarProperty Name="Law" ColumnName="Law" />
+                <ScalarProperty Name="Debt_Collection_Banking" ColumnName="Debt_Collection_Banking" />
+                <ScalarProperty Name="Political" ColumnName="Political" />
+                <ScalarProperty Name="Crime_Penalty" ColumnName="Crime_Penalty" />
+                <ScalarProperty Name="Property_Sale" ColumnName="Property_Sale" />
+                <ScalarProperty Name="Generic_Scam" ColumnName="Generic_Scam" />
+                <ScalarProperty Name="Legitimate" ColumnName="Legitimate" />
+                <ScalarProperty Name="Profanity" ColumnName="Profanity" />
+                <ScalarProperty Name="Foreign" ColumnName="Foreign" />
+                <ScalarProperty Name="Start_Time" ColumnName="Start_Time" />
+                <ScalarProperty Name="End_Time" ColumnName="End_Time" />
+                <ScalarProperty Name="Time_Stamp" ColumnName="Time_Stamp" />
+                <ScalarProperty Name="Target_Value" ColumnName="Target_Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Law_Recording_Classification">
+            <EntityTypeMapping TypeName="Gabriel_DBModel.Law_Recording_Classification">
+              <MappingFragment StoreEntitySet="Law_Recording_Classification">
+                <ScalarProperty Name="EXPLANATION_ADDITIONAL_INFORMATION" ColumnName="EXPLANATION/ADDITIONAL INFORMATION" />
+                <ScalarProperty Name="AUTHORITY" ColumnName="AUTHORITY" />
+                <ScalarProperty Name="CONSENT" ColumnName="CONSENT" />
+                <ScalarProperty Name="STATE" ColumnName="STATE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Model_Catalog">
+            <EntityTypeMapping TypeName="Gabriel_DBModel.Model_Catalog">
+              <MappingFragment StoreEntitySet="Model_Catalog">
+                <ScalarProperty Name="model_artifacts" ColumnName="model_artifacts" />
+                <ScalarProperty Name="model_environment_status" ColumnName="model_environment_status" />
+                <ScalarProperty Name="model_code_location" ColumnName="model_code_location" />
+                <ScalarProperty Name="model_dataset_location" ColumnName="model_dataset_location" />
+                <ScalarProperty Name="model_input_features" ColumnName="model_input_features" />
+                <ScalarProperty Name="model_deployment_environment" ColumnName="model_deployment_environment" />
+                <ScalarProperty Name="model_url" ColumnName="model_url" />
+                <ScalarProperty Name="model_author" ColumnName="model_author" />
+                <ScalarProperty Name="model_version" ColumnName="model_version" />
+                <ScalarProperty Name="model_name" ColumnName="model_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
