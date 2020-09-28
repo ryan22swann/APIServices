@@ -14,7 +14,7 @@ namespace APIServices
             get
             {
                 return new ModelRepositoryEFMemory(
-                    new Context.InMemoryContext());
+                    new Context.GabrielAppContext());
             }
         }
 

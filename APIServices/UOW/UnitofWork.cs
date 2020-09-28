@@ -9,11 +9,12 @@ namespace APIServices.UOW
     public class UnitOfWorkMem : IUnitOfWork
     {
         public IModelRepository ModelRepository { get; internal set; }
-        private InMemoryContext context;
+        private GabrielAppContext context;
 
         public UnitOfWorkMem()
         {
-            context = new InMemoryContext();
+            context = new GabrielAppContext();
+            context.Database.EnsureCreated();
             ModelRepository = new ModelRepositoryEFMemory(context);
         }
 

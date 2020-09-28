@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace APIServices.BusinessObjects
 {
     public class ModelBO
     {
         public int Id { get; set; }
-
+        [Required]
         public string model_name { get; set; }
 
         public string model_version { get; set; }

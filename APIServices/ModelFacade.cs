@@ -10,7 +10,7 @@ namespace APIServices
 {
     public class ModelFacade
     {
-        public IModelCatalog ModelService
+        public IModelService ModelService
         {
             get { return new ModelService(new DALFacade()); }
         }
