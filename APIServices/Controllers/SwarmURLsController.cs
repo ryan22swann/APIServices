@@ -87,14 +87,14 @@ namespace APIServices.Controllers
 
     public class PutSwarmURLController : ApiController
     {
-        public HttpResponseMessage Get(string RoboCallnumber, string filename, string Type, string Text, string AudioURL, string VideoURL, string PassiveClassifer, bool IsTest, string TestNotes)
+        public HttpResponseMessage Get(string RoboCallnumber, string filename, string Type, string Text, string AudioURL, string VideoURL, string PassiveClassifer, bool IsTest, string TestNotes, Guid Gabriel_ID)
 
         {
             using (Gabriel_DBEntities entities = new Gabriel_DBEntities())
             {
 
 
-                return Request.CreateResponse(HttpStatusCode.OK, entities.PutSwarmURL(RoboCallnumber, filename, Type, Text, AudioURL, VideoURL, PassiveClassifer, IsTest, TestNotes).ToList());
+                return Request.CreateResponse(HttpStatusCode.OK, entities.PutSwarmURL(RoboCallnumber, filename, Type, Text, AudioURL, VideoURL, PassiveClassifer, IsTest, TestNotes,Gabriel_ID).ToList());
             }
         }
         

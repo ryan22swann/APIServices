@@ -81,6 +81,7 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <Parameter Name="PassiveClassifier" Type="text" Mode="In" />
           <Parameter Name="IsTest" Type="bit" Mode="In" />
           <Parameter Name="TestNotes" Type="text" Mode="In" />
+          <Parameter Name="Gabrield" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="SwarmUpdateStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SwarmID" Type="varchar" Mode="In" />
@@ -147,12 +148,12 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <EntitySet Name="Law_Classification" EntityType="Self.Law_Classification" />
           <EntitySet Name="Law_Recording_Classification" EntityType="Gabriel_DBModel.Law_Recording_Classification" />
           <EntitySet Name="Model_Catalog" EntityType="Gabriel_DBModel.Model_Catalog" />
-          <FunctionImport Name="GetAvailableSwarms" ReturnType="Collection(Gabriel_DBModel.GetAvailableSwarms_Result)">
+          <FunctionImport Name="GetAvailableSwarms">
             <Parameter Name="SwarmType" Mode="In" Type="String" />
             <Parameter Name="StartRow" Mode="In" Type="Int32" />
             <Parameter Name="NumberofRows" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetSwarmData" ReturnType="Collection(Gabriel_DBModel.GetSwarmData_Result)">
+          <FunctionImport Name="GetSwarmData">
           <Parameter Name="SwarmID" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SwarmUpdateStatus" ReturnType="Collection(Gabriel_DBModel.SwarmUpdateStatus_Result)">
@@ -161,15 +162,15 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
             <Parameter Name="Results" Mode="In" Type="String" />
             <Parameter Name="Winner" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetPlayedSwarmData" ReturnType="Collection(Gabriel_DBModel.GetPlayedSwarmData_Result)">
+          <FunctionImport Name="GetPlayedSwarmData">
           <Parameter Name="SwarmID" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetPlayedSwarmsList" ReturnType="Collection(Gabriel_DBModel.GetPlayedSwarmsList_Result)">
+          <FunctionImport Name="GetPlayedSwarmsList">
             <Parameter Name="SwarmType" Mode="In" Type="String" />
             <Parameter Name="StartRow" Mode="In" Type="Int32" />
             <Parameter Name="NumberofRows" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="PutSwarmURL" ReturnType="Collection(Gabriel_DBModel.PutSwarmURL_Result)">
+          <FunctionImport Name="PutSwarmURL">
             <Parameter Name="RoboCallnumber" Mode="In" Type="String" />
             <Parameter Name="filename" Mode="In" Type="String" />
             <Parameter Name="Type" Mode="In" Type="String" />
@@ -179,6 +180,35 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
             <Parameter Name="PassiveClassifier" Mode="In" Type="String" />
             <Parameter Name="IsTest" Mode="In" Type="Boolean" />
             <Parameter Name="TestNotes" Mode="In" Type="String" />
+            <Parameter Name="Gabrield" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="GetPlayedSwarmsList1" ReturnType="Collection(Gabriel_DBModel.GetPlayedSwarmsList_Result)">
+            <Parameter Name="SwarmType" Mode="In" Type="String" />
+            <Parameter Name="StartRow" Mode="In" Type="Int32" />
+            <Parameter Name="NumberofRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetAvailableSwarms1" ReturnType="Collection(Gabriel_DBModel.GetAvailableSwarms_Result)">
+            <Parameter Name="SwarmType" Mode="In" Type="String" />
+            <Parameter Name="StartRow" Mode="In" Type="Int32" />
+            <Parameter Name="NumberofRows" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPlayedSwarmData1" ReturnType="Collection(Gabriel_DBModel.GetPlayedSwarmData_Result)">
+            <Parameter Name="SwarmID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetSwarmData1" ReturnType="Collection(Gabriel_DBModel.GetSwarmData_Result)">
+            <Parameter Name="SwarmID" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PutSwarmURL1" ReturnType="Collection(Gabriel_DBModel.PutSwarmURL_Result)">
+            <Parameter Name="RoboCallnumber" Mode="In" Type="String" />
+            <Parameter Name="filename" Mode="In" Type="String" />
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="AudioUrl" Mode="In" Type="String" />
+            <Parameter Name="VideoUrl" Mode="In" Type="String" />
+            <Parameter Name="PassiveClassifier" Mode="In" Type="String" />
+            <Parameter Name="IsTest" Mode="In" Type="Boolean" />
+            <Parameter Name="TestNotes" Mode="In" Type="String" />
+            <Parameter Name="Gabrield" Mode="In" Type="Guid" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="Law_Recording_Classification">
@@ -207,36 +237,6 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <Property Name="model_environment_status" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="model_artifacts" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <ComplexType Name="GetAvailableSwarms_Result">
-          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
-          <Property Type="Double" Name="RowKey" Nullable="true" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="SortOrder" Nullable="true" />
-          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
-          <Property Type="Boolean" Name="IsTest" Nullable="true" />
-          <Property Type="String" Name="TestNotes" Nullable="true" MaxLength="Max" />
-        </ComplexType>
-        <ComplexType Name="GetSwarmData_Result">
-          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
-          <Property Type="Double" Name="RowKey" Nullable="true" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="SortOrder" Nullable="true" />
-          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
-          <Property Type="Boolean" Name="IsTest" Nullable="true" />
-          <Property Type="String" Name="TestNotes" Nullable="true" MaxLength="Max" />
-        </ComplexType>
         <ComplexType Name="UpdateSwarmStatus1_Result">
           <Property Type="String" Name="Column1" Nullable="false" MaxLength="20" />
           <Property Type="DateTime" Name="Column2" Nullable="false" Precision="23" />
@@ -254,25 +254,9 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <Property Type="String" Name="SwarmStatus" Nullable="true" MaxLength="255" />
           <Property Type="Binary" Name="Timestamp" Nullable="true" MaxLength="8" />
         </ComplexType>
-        <ComplexType Name="GetPlayedSwarmData_Result">
-          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
-          <Property Type="Double" Name="RoboCallNumber" Nullable="true" />
-          <Property Type="Double" Name="RowKey" Nullable="true" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
-          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="SortOrder" Nullable="false" />
-          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
-          <Property Type="DateTime" Name="DatePlayed" Nullable="true" Precision="23" />
-          <Property Type="String" Name="Results" Nullable="true" MaxLength="Max" />
-          <Property Type="String" Name="Winner" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="GetPlayedSwarmsList_Result">
           <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
-          <Property Type="Double" Name="RoboCallNumber" Nullable="true" />
+          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
           <Property Type="Double" Name="RowKey" Nullable="true" />
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
           <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
@@ -285,10 +269,11 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <Property Type="DateTime" Name="DatePlayed" Nullable="true" Precision="23" />
           <Property Type="String" Name="Results" Nullable="true" MaxLength="Max" />
           <Property Type="String" Name="Winner" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="Gabriel_ID" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="PutSwarmURL_Result">
+        <ComplexType Name="GetAvailableSwarms_Result">
           <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
-          <Property Type="Double" Name="RoboCallNumber" Nullable="true" />
+          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
           <Property Type="Double" Name="RowKey" Nullable="true" />
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
           <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
@@ -300,6 +285,56 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
           <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="IsTest" Nullable="true" />
           <Property Type="String" Name="TestNotes" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="Gabriel_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetPlayedSwarmData_Result">
+          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="RowKey" Nullable="true" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SortOrder" Nullable="false" />
+          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
+          <Property Type="DateTime" Name="DatePlayed" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Results" Nullable="true" MaxLength="Max" />
+          <Property Type="String" Name="Winner" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="Gabriel_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetSwarmData_Result">
+          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="RowKey" Nullable="true" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SortOrder" Nullable="true" />
+          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsTest" Nullable="true" />
+          <Property Type="String" Name="TestNotes" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="Gabriel_ID" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="PutSwarmURL_Result">
+          <Property Type="String" Name="SwarmID" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="RoboCallNumber" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="RowKey" Nullable="true" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Type" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AudioURL" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="VideoURL" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="SortOrder" Nullable="true" />
+          <Property Type="String" Name="PassiveClassifier" Nullable="true" MaxLength="Max" />
+          <Property Type="Boolean" Name="IsTest" Nullable="true" />
+          <Property Type="String" Name="TestNotes" Nullable="true" MaxLength="Max" />
+          <Property Type="Guid" Name="Gabriel_ID" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -356,44 +391,6 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetAvailableSwarms" FunctionName="Gabriel_DBModel.Store.GetAvailableSwarms">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetAvailableSwarms_Result">
-                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
-                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
-                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
-                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
-                <ScalarProperty Name="IsTest" ColumnName="IsTest" />
-                <ScalarProperty Name="TestNotes" ColumnName="TestNotes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetSwarmData" FunctionName="Gabriel_DBModel.Store.GetSwarmData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetSwarmData_Result">
-                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
-                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
-                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
-                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
-                <ScalarProperty Name="IsTest" ColumnName="IsTest" />
-                <ScalarProperty Name="TestNotes" ColumnName="TestNotes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SwarmUpdateStatus" FunctionName="Gabriel_DBModel.Store.SwarmUpdateStatus">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Gabriel_DBModel.SwarmUpdateStatus_Result">
@@ -403,27 +400,7 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPlayedSwarmData" FunctionName="Gabriel_DBModel.Store.GetPlayedSwarmData">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetPlayedSwarmData_Result">
-                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
-                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
-                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
-                <ScalarProperty Name="FileName" ColumnName="FileName" />
-                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-                <ScalarProperty Name="Type" ColumnName="Type" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
-                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
-                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
-                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
-                <ScalarProperty Name="DatePlayed" ColumnName="DatePlayed" />
-                <ScalarProperty Name="Results" ColumnName="Results" />
-                <ScalarProperty Name="Winner" ColumnName="Winner" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetPlayedSwarmsList" FunctionName="Gabriel_DBModel.Store.GetPlayedSwarmsList">
+          <FunctionImportMapping FunctionImportName="GetPlayedSwarmsList1" FunctionName="Gabriel_DBModel.Store.GetPlayedSwarmsList">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Gabriel_DBModel.GetPlayedSwarmsList_Result">
                 <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
@@ -440,10 +417,72 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
                 <ScalarProperty Name="DatePlayed" ColumnName="DatePlayed" />
                 <ScalarProperty Name="Results" ColumnName="Results" />
                 <ScalarProperty Name="Winner" ColumnName="Winner" />
+                <ScalarProperty Name="Gabriel_ID" ColumnName="Gabriel_ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="PutSwarmURL" FunctionName="Gabriel_DBModel.Store.PutSwarmURL">
+          <FunctionImportMapping FunctionImportName="GetAvailableSwarms1" FunctionName="Gabriel_DBModel.Store.GetAvailableSwarms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetAvailableSwarms_Result">
+                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
+                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
+                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
+                <ScalarProperty Name="IsTest" ColumnName="IsTest" />
+                <ScalarProperty Name="TestNotes" ColumnName="TestNotes" />
+                <ScalarProperty Name="Gabriel_ID" ColumnName="Gabriel_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetPlayedSwarmData1" FunctionName="Gabriel_DBModel.Store.GetPlayedSwarmData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetPlayedSwarmData_Result">
+                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
+                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
+                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
+                <ScalarProperty Name="DatePlayed" ColumnName="DatePlayed" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+                <ScalarProperty Name="Winner" ColumnName="Winner" />
+                <ScalarProperty Name="Gabriel_ID" ColumnName="Gabriel_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetSwarmData1" FunctionName="Gabriel_DBModel.Store.GetSwarmData">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Gabriel_DBModel.GetSwarmData_Result">
+                <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
+                <ScalarProperty Name="RoboCallNumber" ColumnName="RoboCallNumber" />
+                <ScalarProperty Name="RowKey" ColumnName="RowKey" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="AudioURL" ColumnName="AudioURL" />
+                <ScalarProperty Name="VideoURL" ColumnName="VideoURL" />
+                <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+                <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
+                <ScalarProperty Name="IsTest" ColumnName="IsTest" />
+                <ScalarProperty Name="TestNotes" ColumnName="TestNotes" />
+                <ScalarProperty Name="Gabriel_ID" ColumnName="Gabriel_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PutSwarmURL1" FunctionName="Gabriel_DBModel.Store.PutSwarmURL">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Gabriel_DBModel.PutSwarmURL_Result">
                 <ScalarProperty Name="SwarmID" ColumnName="SwarmID" />
@@ -459,6 +498,7 @@ warning 6002: The table/view 'Gabriel_DB.dbo.Law_Recording_Classification' does 
                 <ScalarProperty Name="PassiveClassifier" ColumnName="PassiveClassifier" />
                 <ScalarProperty Name="IsTest" ColumnName="IsTest" />
                 <ScalarProperty Name="TestNotes" ColumnName="TestNotes" />
+                <ScalarProperty Name="Gabriel_ID" ColumnName="Gabriel_ID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

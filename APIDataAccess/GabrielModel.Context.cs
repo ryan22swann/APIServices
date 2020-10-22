@@ -31,31 +31,7 @@ namespace APIDataAccess
         public virtual DbSet<Law_Recording_Classification> Law_Recording_Classification { get; set; }
         public virtual DbSet<Model_Catalog> Model_Catalog { get; set; }
     
-        public virtual ObjectResult<GetAvailableSwarms_Result> GetAvailableSwarms(string swarmType, Nullable<int> startRow, Nullable<int> numberofRows)
-        {
-            var swarmTypeParameter = swarmType != null ?
-                new ObjectParameter("SwarmType", swarmType) :
-                new ObjectParameter("SwarmType", typeof(string));
-    
-            var startRowParameter = startRow.HasValue ?
-                new ObjectParameter("StartRow", startRow) :
-                new ObjectParameter("StartRow", typeof(int));
-    
-            var numberofRowsParameter = numberofRows.HasValue ?
-                new ObjectParameter("NumberofRows", numberofRows) :
-                new ObjectParameter("NumberofRows", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAvailableSwarms_Result>("GetAvailableSwarms", swarmTypeParameter, startRowParameter, numberofRowsParameter);
-        }
-    
-        public virtual ObjectResult<GetSwarmData_Result> GetSwarmData(string swarmID)
-        {
-            var swarmIDParameter = swarmID != null ?
-                new ObjectParameter("SwarmID", swarmID) :
-                new ObjectParameter("SwarmID", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSwarmData_Result>("GetSwarmData", swarmIDParameter);
-        }
+
     
         public virtual ObjectResult<SwarmUpdateStatus_Result> SwarmUpdateStatus(string swarmID, string status, string results, string winner)
         {
@@ -78,15 +54,7 @@ namespace APIDataAccess
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SwarmUpdateStatus_Result>("SwarmUpdateStatus", swarmIDParameter, statusParameter, resultsParameter, winnerParameter);
         }
     
-        public virtual ObjectResult<GetPlayedSwarmData_Result> GetPlayedSwarmData(string swarmID)
-        {
-            var swarmIDParameter = swarmID != null ?
-                new ObjectParameter("SwarmID", swarmID) :
-                new ObjectParameter("SwarmID", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlayedSwarmData_Result>("GetPlayedSwarmData", swarmIDParameter);
-        }
-    
+
         public virtual ObjectResult<GetPlayedSwarmsList_Result> GetPlayedSwarmsList(string swarmType, Nullable<int> startRow, Nullable<int> numberofRows)
         {
             var swarmTypeParameter = swarmType != null ?
@@ -101,10 +69,45 @@ namespace APIDataAccess
                 new ObjectParameter("NumberofRows", numberofRows) :
                 new ObjectParameter("NumberofRows", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlayedSwarmsList_Result>("GetPlayedSwarmsList", swarmTypeParameter, startRowParameter, numberofRowsParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlayedSwarmsList_Result>("GetPlayedSwarmsList1", swarmTypeParameter, startRowParameter, numberofRowsParameter);
         }
     
-        public virtual ObjectResult<PutSwarmURL_Result> PutSwarmURL(string roboCallnumber, string filename, string type, string text, string audioUrl, string videoUrl, string passiveClassifier, Nullable<bool> isTest, string testNotes)
+        public virtual ObjectResult<GetAvailableSwarms_Result> GetAvailableSwarms(string swarmType, Nullable<int> startRow, Nullable<int> numberofRows)
+        {
+            var swarmTypeParameter = swarmType != null ?
+                new ObjectParameter("SwarmType", swarmType) :
+                new ObjectParameter("SwarmType", typeof(string));
+    
+            var startRowParameter = startRow.HasValue ?
+                new ObjectParameter("StartRow", startRow) :
+                new ObjectParameter("StartRow", typeof(int));
+    
+            var numberofRowsParameter = numberofRows.HasValue ?
+                new ObjectParameter("NumberofRows", numberofRows) :
+                new ObjectParameter("NumberofRows", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAvailableSwarms_Result>("GetAvailableSwarms1", swarmTypeParameter, startRowParameter, numberofRowsParameter);
+        }
+    
+        public virtual ObjectResult<GetPlayedSwarmData_Result> GetPlayedSwarmData(string swarmID)
+        {
+            var swarmIDParameter = swarmID != null ?
+                new ObjectParameter("SwarmID", swarmID) :
+                new ObjectParameter("SwarmID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPlayedSwarmData_Result>("GetPlayedSwarmData1", swarmIDParameter);
+        }
+    
+        public virtual ObjectResult<GetSwarmData_Result> GetSwarmData(string swarmID)
+        {
+            var swarmIDParameter = swarmID != null ?
+                new ObjectParameter("SwarmID", swarmID) :
+                new ObjectParameter("SwarmID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSwarmData_Result>("GetSwarmData1", swarmIDParameter);
+        }
+    
+        public virtual ObjectResult<PutSwarmURL_Result> PutSwarmURL(string roboCallnumber, string filename, string type, string text, string audioUrl, string videoUrl, string passiveClassifier, Nullable<bool> isTest, string testNotes, Nullable<System.Guid> gabrield)
         {
             var roboCallnumberParameter = roboCallnumber != null ?
                 new ObjectParameter("RoboCallnumber", roboCallnumber) :
@@ -142,7 +145,11 @@ namespace APIDataAccess
                 new ObjectParameter("TestNotes", testNotes) :
                 new ObjectParameter("TestNotes", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PutSwarmURL_Result>("PutSwarmURL", roboCallnumberParameter, filenameParameter, typeParameter, textParameter, audioUrlParameter, videoUrlParameter, passiveClassifierParameter, isTestParameter, testNotesParameter);
+            var gabrieldParameter = gabrield.HasValue ?
+                new ObjectParameter("Gabrield", gabrield) :
+                new ObjectParameter("Gabrield", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<PutSwarmURL_Result>("PutSwarmURL1", roboCallnumberParameter, filenameParameter, typeParameter, textParameter, audioUrlParameter, videoUrlParameter, passiveClassifierParameter, isTestParameter, testNotesParameter, gabrieldParameter);
         }
     }
 }

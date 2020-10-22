@@ -14,7 +14,7 @@ namespace APIDataAccess
     public partial class PutSwarmURL_Result
     {
         public string SwarmID { get; set; }
-        public Nullable<double> RoboCallNumber { get; set; }
+        public string RoboCallNumber { get; set; }
         public Nullable<double> RowKey { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
@@ -26,5 +26,6 @@ namespace APIDataAccess
         public string PassiveClassifier { get; set; }
         public Nullable<bool> IsTest { get; set; }
         public string TestNotes { get; set; }
+        public Nullable<System.Guid> Gabriel_ID { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace APIDataAccess
     public partial class GetPlayedSwarmsList_Result
     {
         public string SwarmID { get; set; }
-        public Nullable<double> RoboCallNumber { get; set; }
+        public string RoboCallNumber { get; set; }
         public Nullable<double> RowKey { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
@@ -27,5 +27,6 @@ namespace APIDataAccess
         public Nullable<System.DateTime> DatePlayed { get; set; }
         public string Results { get; set; }
         public string Winner { get; set; }
+        public Nullable<System.Guid> Gabriel_ID { get; set; }
     }
 }

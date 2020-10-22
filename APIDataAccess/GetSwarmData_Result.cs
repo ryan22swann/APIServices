@@ -15,16 +15,17 @@ namespace APIDataAccess
     {
         public string SwarmID { get; set; }
         public string RoboCallNumber { get; set; }
-        public string AudioURL { get; set; }
-        public string VideoURL { get; set; }
-        public string Text { get; set; }
-        public string Type { get; set; }
         public Nullable<double> RowKey { get; set; }
         public string FileName { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
+        public string Type { get; set; }
+        public string Text { get; set; }
+        public string AudioURL { get; set; }
+        public string VideoURL { get; set; }
         public Nullable<int> SortOrder { get; set; }
         public string PassiveClassifier { get; set; }
         public Nullable<bool> IsTest { get; set; }
         public string TestNotes { get; set; }
+        public Nullable<System.Guid> Gabriel_ID { get; set; }
     }
 }
